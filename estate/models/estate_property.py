@@ -95,6 +95,9 @@ class EstatePropertyType(models.Model):
     name = fields.Char(required=True)
     property_ids = fields.One2many(
         "estate.property", "property_type_id", string="Property ID")
+    offer_ids = fields.One2many(
+        "estate.property.offer", "property_type_id", string="Property offer Id")
+    offer_count = fields.Integer(compute="_compute_count_offer")
     sequence = fields.Integer('Sequence', default=1,
                               help="Used to order stages. Lower is better.")
 
@@ -103,6 +106,33 @@ class EstatePropertyType(models.Model):
          'The property tag should be unique.')
     ]
 
+    @api.depends("offer_ids")
+    def _compute_count_offer(self):
+        for record in self:
+            # offers = record.property_ids.mapped("offer_ids")
+            record.offer_count = len(record.offer_ids)
+
+    def action_stat_button(self):
+        """ This opens the xml view specified in xml_id for the current vehicle """
+        self.ensure_one()
+        xml_id = self.env.context.get('xml_id')
+        if xml_id:
+
+            res = self.env['ir.actions.act_window']._for_xml_id(xml_id)
+            res.update(
+                context=dict(
+                    self.env.context,
+                    default_property_type_id=self.id,
+                    group_by=False
+                ),
+                domain=[('property_type_id', '=', self.id)]
+            )
+            import pdb
+            pdb.set_trace()
+
+            return res
+        return False
+
 
 class EstatePropertyTag(models.Model):
     _name = "estate.property.tag"
@@ -110,6 +140,7 @@ class EstatePropertyTag(models.Model):
     _order = "name asc"
 
     name = fields.Char(required=True)
+    color = fields.Integer()
 
     _sql_constraints = [
         ('check_name', 'unique(name)',
@@ -129,6 +160,8 @@ class EstatePropertyOffer(models.Model):
         "res.partner", string="Partner", required=True)
     property_id = fields.Many2one(
         "estate.property", string="Property ID", required=True)
+    property_type_id = fields.Many2one(
+        related='property_id.property_type_id', store=True)
     validity = fields.Integer(
         default=7)
     date_deadline = fields.Date(

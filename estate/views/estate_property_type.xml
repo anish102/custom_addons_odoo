@@ -7,8 +7,9 @@
             <field name="model">estate.property.type</field>
             <field name="arch" type="xml">
                 <tree string="">
-                <field name="sequence" string="sequence" widget="handle"/>
-                <field name="name"></field>
+                    <field name="sequence" string="sequence" widget="handle"/>
+                    <field name="name"></field>
+                    <field name="offer_count"></field>
                 </tree>
             </field>
         </record>
@@ -19,6 +20,11 @@
             <field name="arch" type="xml">
                 <form string="Estate property type form">
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_stat_button" type="object" class="oe_stat_button" context="{'xml_id':'estate.estate_property_offer_action'}" icon="fa-money">
+                                <field name="offer_ids" widget="statinfo" string="Offers"/>
+                            </button>
+                        </div>
                         <h1>
                             <field name="name"></field>
                         </h1>
