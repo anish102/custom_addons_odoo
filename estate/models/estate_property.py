@@ -38,6 +38,15 @@ class EstateProperty(models.Model):
     best_price = fields.Float(compute="_compute_best_offer")
     # status = fields.Char(default="New", readonly=True)
 
+    @api.ondelete(at_uninstall=False)
+    def delete(self):
+        for record in self:
+            if record.state != 'new' and record.state != 'canceled':
+                raise UserError(
+                    "Only new and canceled properties can be deleted!")
+            else:
+                return "Property deleted successfully."
+
     _sql_constraints = [
         ('check_expected_price', 'CHECK(expected_price > 0)',
          'The expected price should be positive.'),
@@ -167,6 +176,20 @@ class EstatePropertyOffer(models.Model):
     date_deadline = fields.Date(
         compute="_compute_deadline", inverse="_inverse_compute_deadline")
 
+    @api.model
+    def create(self, vals):
+        offer = super(EstatePropertyOffer, self).create(vals)
+        property = offer.property_id
+        property.state = 'offer_received'
+        existing_offers = self.search([
+            ('property_id', '=', property.id),
+            ('price', '>', vals.get('price'))
+        ])
+        if existing_offers:
+            raise UserError(
+                "A higher offer already exists for this property!")
+        return offer
+
     _sql_constraints = [
         ('check_offer_price', 'CHECK(offer > 0)',
          'The offer price should be positive.')
@@ -198,7 +221,14 @@ class EstatePropertyOffer(models.Model):
 
     def action_offer_refuse(self):
         for record in self:
-            if self.status == 'accepted':
+            if record.status == 'accepted':
                 raise UserError("A rejected offer cannot be accepted!")
             else:
-                self.status = 'refused'
+                record.status = 'refused'
+
+
+class InheritedModel(models.Model):
+    _inherit = 'res.users'
+
+    property_ids = fields.One2many(
+        "estate.property", "user_id", string="inerited", domain="['|',('state', '=', 'new'),('state', '=', 'offer_received')]")
