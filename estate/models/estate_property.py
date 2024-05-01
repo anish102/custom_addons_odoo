@@ -21,7 +21,7 @@ class EstateProperty(models.Model):
     postcode = fields.Char()
     date_availability = fields.Date(
         copy=False,  default=datetime.today() + timedelta(days=90))
-    expected_price = fields.Float(required=True)
+    expected_price = fields.Float(required=True, string="Expected Price")
     selling_price = fields.Float(readonly=True, copy=False)
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
@@ -122,7 +122,6 @@ class EstatePropertyType(models.Model):
             record.offer_count = len(record.offer_ids)
 
     def action_stat_button(self):
-        """ This opens the xml view specified in xml_id for the current vehicle """
         self.ensure_one()
         xml_id = self.env.context.get('xml_id')
         if xml_id:
@@ -136,9 +135,6 @@ class EstatePropertyType(models.Model):
                 ),
                 domain=[('property_type_id', '=', self.id)]
             )
-            import pdb
-            pdb.set_trace()
-
             return res
         return False
 
