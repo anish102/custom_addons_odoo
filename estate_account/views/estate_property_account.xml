@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="estate_property_account_action" model="ir.actions.act_window">
+        <field name="name">Estate account action</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="estate_property_account_root_menu" name="Estate account" action="estate_property_account_action" sequence="4"/>
+</odoo>
