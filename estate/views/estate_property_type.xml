@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <tree string="">
                     <field name="sequence" string="sequence" widget="handle"/>
-                    <field name="name"></field>
-                    <field name="offer_count"></field>
+                    <field name="name"/>
+                    <field name="offer_count"/>
                 </tree>
             </field>
         </record>
@@ -26,7 +26,7 @@
                             </button>
                         </div>
                         <h1>
-                            <field name="name"></field>
+                            <field name="name"/>
                         </h1>
                         <notebook>
                             <page name="properties" string="Properties">

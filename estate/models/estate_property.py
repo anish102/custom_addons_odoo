@@ -35,7 +35,7 @@ class EstateProperty(models.Model):
     state = fields.Selection(
         selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), ('sold', 'Sold'), ('canceled', 'Canceled')], copy=False, required=True, default='new')
     total_area = fields.Integer(compute="_compute_total_area")
-    best_price = fields.Float(compute="_compute_best_offer")
+    best_price = fields.Float(compute="_compute_best_offer", store=True)
     # status = fields.Char(default="New", readonly=True)
 
     @api.ondelete(at_uninstall=False)
@@ -77,6 +77,7 @@ class EstateProperty(models.Model):
     @api.constrains("expected_price", "selling_price")
     def _check_selling_price(self):
         for record in self:
+            # if(record.state_property!=='')
             if record.selling_price > 0 and record.selling_price < ((90/100)*record.expected_price):
                 raise ValidationError(
                     "The selling price cannot be less than 90% of the expected price.")

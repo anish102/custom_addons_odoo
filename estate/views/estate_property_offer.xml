@@ -6,14 +6,14 @@
             <field name="model">estate.property.offer</field>
             <field name="arch" type="xml">
                 <tree string="Estate property offer view tree" editable="bottom" decoration-danger="status=='refused'" decoration-success="status=='accepted'">
-                    <field name="price"></field>
-                    <field name="partner_id"></field>
-                    <field name="validity" string= "Validity(days)"></field>
-                    <field name="date_deadline" string="Deadline"></field>
-                    <field name="property_type_id" string="Propery type"></field>
+                    <field name="price"/>
+                    <field name="partner_id"/>
+                    <field name="validity" string= "Validity(days)"/>
+                    <field name="date_deadline" string="Deadline"/>
+                    <field name="property_type_id" string="Propery type"/>
                     <button name="action_offer_accept" string=" " attrs="{'invisible': ['|',('status', '=', 'accepted'),('status', '=', 'refused')]}" type="object" icon="fa-check"/>
                     <button name="action_offer_refuse" string=" " attrs="{'invisible': ['|',('status', '=', 'accepted'),('status', '=', 'refused')]}" type="object" icon="fa-times"/>
-                    <field name="status" invisible="1"></field>
+                    <field name="status" invisible="1"/>
                 </tree>
             </field>
         </record>
@@ -25,11 +25,11 @@
                 <form string="Estate property offer view form">
                     <sheet>
                         <group>
-                            <field name="price"></field>
-                            <field name="partner_id"></field>
-                            <field name="status"></field>
-                            <field name="validity" string= "Validity(days)"></field>
-                            <field name="date_deadline" string="Deadline"></field>
+                            <field name="price"/>
+                            <field name="partner_id"/>
+                            <field name="status"/>
+                            <field name="validity" string= "Validity(days)"/>
+                            <field name="date_deadline" string="Deadline"/>
                         </group>
                     </sheet>
                 </form>
