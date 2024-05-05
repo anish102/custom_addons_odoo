@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.client" id="dashboard_action">
+        <field name="name">My Client Action</field>
+        <field name="tag">client_action.empty_dashboard</field>
+    </record>
+
+    <record model="ir.actions.client" id="counter_action">
+        <field name="name">Counter</field>
+        <field name="tag">client_action.counter</field>
+    </record>
+
+    <menuitem id="client_action_root_menu" name="Client Action" sequence="1">
+        <menuitem id="dashboard_menu" name="Dashboard" action="dashboard_action"/>
+        <menuitem id="counter_menu" name="Counter"  action="counter_action"/>
+    </menuitem>
+
+</odoo>
