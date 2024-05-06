@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<templates xml:space="preserve">
+    <t t-name="client_action.TodoList" owl="1">
+        <div>
+            <input placeholder="Enter a new task" t-on-keyup="addTodo"/>
+            <t t-foreach="todoList" t-as="Todo" t-key="Todo.id">
+                <Todo id="Todo.id" description="Todo.description" done="Todo.done"/>
+            </t>
+        </div>
+    </t>
+</templates>

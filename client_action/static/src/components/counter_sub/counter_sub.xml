@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<templates xml:space="preserve">
+    <t t-name="client_action.Counter_sub" owl="1">
+        <h3>This is from child class</h3>
+    </t>
+</templates>

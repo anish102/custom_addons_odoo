@@ -2,12 +2,21 @@
 
 <templates xml:space="preserve">
    <t t-name="client_action.Counter" owl="1">
-      <p>Counter: <t t-esc="state.value"/></p>
+      <h2>Counter: <t t-esc="state.value"/>
+      </h2>
       <button class="btn btn-primary" t-on-click="increment">Increment</button>
       <br/>
       <br/>
-      <br/>
-      <br/>
       <button class="btn btn-primary" t-on-click="decrement">Decrement</button>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <ChildCounter/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <TodoList/> 
    </t>
 </templates>
