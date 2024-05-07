@@ -4,6 +4,7 @@ import { Component, useState } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { ChildCounter } from "../counter_sub/counter_sub";
 import { TodoList } from "../todo_list/todo_list";
+import { Card } from "../card/card";
 
 export class Counter extends Component {
   static template = "client_action.Counter";
@@ -20,7 +21,7 @@ export class Counter extends Component {
     this.state.value--;
   }
 
-  static components = { ChildCounter, TodoList };
+  static components = { ChildCounter, TodoList, Card };
 }
 
 registry.category("actions").add("client_action.counter", Counter);

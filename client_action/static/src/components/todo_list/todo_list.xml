@@ -3,9 +3,9 @@
 <templates xml:space="preserve">
     <t t-name="client_action.TodoList" owl="1">
         <div>
-            <input placeholder="Enter a new task" t-on-keyup="addTodo"/>
+            <input placeholder="Enter a new task" t-on-keyup="addTodo" t-ref="inputRef"/>
             <t t-foreach="todoList" t-as="Todo" t-key="Todo.id">
-                <Todo id="Todo.id" description="Todo.description" done="Todo.done"/>
+                <Todo id="Todo.id" description="Todo.description" done="Todo.done" toggleState.bind="toggleTodo" deleteTodo.bind="removeTodo"/>
             </t>
         </div>
     </t>

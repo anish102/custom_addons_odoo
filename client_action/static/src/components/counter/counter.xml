@@ -17,6 +17,14 @@
       <br/>
       <br/>
       <br/>
-      <TodoList/> 
+      <Card>
+         <t t-set-slot="title"></t>
+         <t t-set-slot="content">kldsjalkfjal;skdjf;laksdflkasdlkfasdlkf</t>
+      </Card>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <TodoList/>
    </t>
 </templates>
