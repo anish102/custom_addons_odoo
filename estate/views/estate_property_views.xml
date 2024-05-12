@@ -138,9 +138,15 @@
             <field name="context">{'search_default_filter_estate_property': True, 'search_default_current': True}</field>
         </record>
 
+        <record model="ir.actions.client" id="dashboard">
+            <field name="name">Real estate dashboard</field>
+            <field name="tag">estate.dashboard</field>
+        </record>
+
         <menuitem id="estate_property_root" name="Real Estate">
             <menuitem id="estate_property_adevertisement_menu" name="Advertisements" action="estate_property_action" sequence = "1"/>
             <menuitem id="estate_property_settings_menu" name="Settings"/>
+            <menuitem id="estate.dashboard_menu" name="Dashboard" action="estate.dashboard"/>
         </menuitem>
     </data>
 </odoo>

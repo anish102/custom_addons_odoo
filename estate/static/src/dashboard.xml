@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="estate.clientaction" owl="1">
+        <Layout display="this.display">
+            <t t-set-slot="control-panel-bottom-left">
+                <button t-on-click="openBuyers" type="on" class="btn btn-primary">Buyers</button>
+                <button t-on-click="openLast7DaysNewEstateProperties" type="button" class="btn btn-primary">New properties</button>
+                <button t-on-click="openSoldProperties" type="button" class="btn btn-primary">Sold properties</button>
+            </t>
+            <t t-call="estate.clientaction.statistics"/>
+        </Layout>
+    </t>
+    <t t-name="estate.clientaction.statistics" owl="1">
+        <div class="d-flex flex-nowrap">
+            <div t-foreach="keyToString" t-as="key" t-key="key" class="m-2">
+                <Card>
+                    <t t-set-slot="title">
+                        <t t-esc="keyToString[key]"/>
+                    </t>
+                    <p class="card-text">
+                        <t t-esc="statistics[key]"/>
+                    </p>
+                </Card>
+            </div>
+        </div>
+    </t>
+</template>

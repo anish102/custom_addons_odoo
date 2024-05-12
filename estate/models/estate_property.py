@@ -96,6 +96,23 @@ class EstateProperty(models.Model):
             else:
                 record.state = "canceled"
 
+    @api.model
+    def get_statistics(self):
+        total_properties = self.search_count([]),
+        properties_with_garden = self.search_count(
+            [('garden', '=', 'True')]),
+        properties_with_garage = self.search_count(
+            [('garage', '=', 'True')])
+        most_expensive_property_price = self.search(
+            [('expected_price', '=', max(self.search([]).mapped('expected_price')))], limit=1)
+        most_expensive_property = most_expensive_property_price.name if most_expensive_property_price else 'N/A'
+        return {
+            "total_properties": total_properties,
+            "properties_with_garden": properties_with_garden,
+            "properties_with_garage": properties_with_garage,
+            "most_expensive_property": most_expensive_property
+        }
+
 
 class EstatePropertyType(models.Model):
     _name = "estate.property.type"
