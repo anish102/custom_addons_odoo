@@ -6,7 +6,10 @@ import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { Domain } from "@web/core/domain";
 import { Card } from "./card/card";
+import { PieChart } from "./pie_chart/pie_chart";
 import { getDefaultConfig } from "@web/views/view";
+import { BarGraph } from "./bar_graph/bar_graph";
+import { LineGraph } from "./line_graph/line_graph";
 
 class EstateDashboard extends Component {
   setup() {
@@ -18,7 +21,6 @@ class EstateDashboard extends Component {
     });
 
     this.action = useService("action");
-    this.rpc = useService("rpc");
     this.propertyService = useService("propertyService");
 
     this.display = {
@@ -30,6 +32,7 @@ class EstateDashboard extends Component {
       properties_with_garden: "Properties with garden",
       properties_with_garage: "Properties with garage",
       most_expensive_property: "Most expensive property",
+      most_cheap_property: "Cheapest property",
     };
 
     onWillStart(async () => {
@@ -66,7 +69,7 @@ class EstateDashboard extends Component {
   }
 }
 
-EstateDashboard.components = { Layout, Card };
+EstateDashboard.components = { Layout, Card, PieChart, BarGraph, LineGraph };
 EstateDashboard.template = "estate.clientaction";
 
 registry.category("actions").add("estate.dashboard", EstateDashboard);

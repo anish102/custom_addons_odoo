@@ -106,11 +106,41 @@ class EstateProperty(models.Model):
         most_expensive_property_price = self.search(
             [('expected_price', '=', max(self.search([]).mapped('expected_price')))], limit=1)
         most_expensive_property = most_expensive_property_price.name if most_expensive_property_price else 'N/A'
+        most_cheap_property_price = self.search(
+            [('expected_price', '=', min(self.search([]).mapped('expected_price')))], limit=1)
+        most_cheap_property = most_cheap_property_price.name if most_cheap_property_price else 'N/A'
+        property_types = self.env['estate.property.type'].search([])
+        properties_by_type = {}
+        for property_type in property_types:
+            properties_count = self.search_count(
+                [('property_type_id', '=', property_type.id)])
+            properties_by_type[property_type.name] = properties_count
+        property_tags = self.env['estate.property.tag'].search([])
+        properties_by_tag = {}
+        for property_tag in property_tags:
+            properties_count = self.search_count(
+                [('tag_ids', '=', property_tag.id)])
+            properties_by_tag[property_tag.name] = properties_count
+        properties = self.search([], order="expected_price asc")
+        properties_price = {}
+        for property in properties:
+            properties_price[property.name] = property.expected_price
+
+        properties_name = [prop.name for prop in properties]
+        properties_area = [(prop.living_area+prop.garden_area)
+                           for prop in properties]
+        area = {name: area for name, area in zip(
+            properties_name, properties_area)}
         return {
             "total_properties": total_properties,
             "properties_with_garden": properties_with_garden,
             "properties_with_garage": properties_with_garage,
-            "most_expensive_property": most_expensive_property
+            "most_expensive_property": most_expensive_property,
+            "most_cheap_property": most_cheap_property,
+            "properties_by_type": properties_by_type,
+            "properties_by_tag": properties_by_tag,
+            "properties_price": properties_price,
+            "area": area
         }
 
 
