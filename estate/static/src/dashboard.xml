@@ -42,46 +42,46 @@
         <div class="m-5">
             <div class="row">
                 <div class="col-md-6">
-                    <Card className="'w-100'">
+                    <ChartCard className="'w-100'">
                         <t t-set-slot="title">Property by type</t>
                         <PieChart data="statistics['properties_by_type']" label="'Property by type'"/>
-                    </Card>
+                    </ChartCard>
                 </div>
                 <div class="col-md-6">
-                    <Card className="'w-100'">
+                    <ChartCard className="'w-100'">
                         <t t-set-slot="title">Property by tag</t>
                         <BarGraph data="statistics['properties_by_tag']" label="'Property by tag'"/>
-                    </Card>
+                    </ChartCard>
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="col-md-6">
-                    <Card className="'w-100'">
+                    <ChartCard className="'w-100'">
                         <t t-set-slot="title">Property by price</t>
                         <BarGraph data="statistics['properties_price']" label="'Property by price'"/>
-                    </Card>
+                    </ChartCard>
                 </div>
                 <div class="col-md-6">
-                    <Card className="'w-100'">
+                    <ChartCard className="'w-100'">
                         <t t-set-slot="title">Property by total area</t>
                         <LineGraph data="statistics['area']" label="'Property by area'"/>
-                    </Card>
+                    </ChartCard>
                 </div>
             </div>
         </div>
     </t>
 
     <t t-name="estate.clientaction.statistics" owl="1">
-        <div class="d-flex flex-nowrap overflow-auto" style="max-height: 200px;">
+        <div class="dashboard_nav">
             <div t-foreach="keyToString" t-as="key" t-key="key" class="m-2">
-                <Card className="'w-3'">
+                <StatCard>
                     <t t-set-slot="title">
                         <t t-esc="keyToString[key]"/>
                     </t>
                     <p class="card-text">
                         <t t-esc="statistics[key]"/>
                     </p>
-                </Card>
+                </StatCard>
             </div>
         </div>
     </t>

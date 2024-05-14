@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-    <t t-name="estate_propeties.Card" owl="1">
-        <div class="card" style="width: 30rem; padding:10px 50px" t-att-class="props.className">
+    <t t-name="estate_propeties.StatCard" owl="1">
+        <div class="stat_card">
             <div class="card-body">
                 <t t-if="props.slots.title">
                     <h2 class="card-title">

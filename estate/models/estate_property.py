@@ -131,6 +131,10 @@ class EstateProperty(models.Model):
                            for prop in properties]
         area = {name: area for name, area in zip(
             properties_name, properties_area)}
+        yesterday = fields.Date.to_string(datetime.now() - timedelta(days=1))
+        properties_yesterday = self.search_count(
+            [('create_date', '<=', yesterday)])
+        properties_change = total_properties[0] - properties_yesterday
         return {
             "total_properties": total_properties,
             "properties_with_garden": properties_with_garden,
@@ -140,7 +144,8 @@ class EstateProperty(models.Model):
             "properties_by_type": properties_by_type,
             "properties_by_tag": properties_by_tag,
             "properties_price": properties_price,
-            "area": area
+            "area": area,
+            "properties_change": properties_change,
         }
 
 

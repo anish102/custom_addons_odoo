@@ -2,8 +2,8 @@
 
 import { Component } from "@odoo/owl";
 
-export class Card extends Component {
-  static template = "estate_propeties.Card";
+export class ChartCard extends Component {
+  static template = "estate_propeties.ChartCard";
 
   static props = {
     slots: {

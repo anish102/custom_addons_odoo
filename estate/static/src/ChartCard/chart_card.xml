@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="estate_propeties.ChartCard" owl="1">
+        <div class="chart_card" t-att-class="props.className">
+            <div class="card-body">
+                <t t-if="props.slots.title">
+                    <h2 class="card-title">
+                        <t t-slot="title"/>
+                    </h2>
+                </t>
+                <h2 class="card-text">
+                    <t t-slot="default"/>
+                </h2>
+            </div>
+        </div>
+    </t>
+</templates>

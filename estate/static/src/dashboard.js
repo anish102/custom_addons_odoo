@@ -5,7 +5,8 @@ import { Layout } from "@web/search/layout";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { Domain } from "@web/core/domain";
-import { Card } from "./card/card";
+import { StatCard } from "./stat_card/stat_card";
+import { ChartCard } from "./ChartCard/chart_card";
 import { PieChart } from "./pie_chart/pie_chart";
 import { getDefaultConfig } from "@web/views/view";
 import { BarGraph } from "./bar_graph/bar_graph";
@@ -28,11 +29,12 @@ class EstateDashboard extends Component {
     };
 
     this.keyToString = {
-      total_properties: "Total number of properties",
+      total_properties: "Properties",
       properties_with_garden: "Properties with garden",
       properties_with_garage: "Properties with garage",
       most_expensive_property: "Most expensive property",
       most_cheap_property: "Cheapest property",
+      properties_change: "Change in property",
     };
 
     onWillStart(async () => {
@@ -69,7 +71,14 @@ class EstateDashboard extends Component {
   }
 }
 
-EstateDashboard.components = { Layout, Card, PieChart, BarGraph, LineGraph };
+EstateDashboard.components = {
+  Layout,
+  StatCard,
+  ChartCard,
+  PieChart,
+  BarGraph,
+  LineGraph,
+};
 EstateDashboard.template = "estate.clientaction";
 
 registry.category("actions").add("estate.dashboard", EstateDashboard);
